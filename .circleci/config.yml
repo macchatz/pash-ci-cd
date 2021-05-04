@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  one:
+  build:
     docker:
       - image: ubuntu:18.04
         auth:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run: apt-get update -y; apt-get upgrade -y; apt-get install -y git sudo locales locales-all curl wget wamerican-insane wget;
-      - run: git clone https://github.com/dkarnikis/pash.git /pash/ 
+      - run: git clbuild https://github.com/dkarnikis/pash.git /pash/ 
       - run: sudo bash /pash/scripts/install.sh -p
       #- run: export LC_ALL en_US.UTF-8  
       #- run: export LANG en_US.UTF-8    
@@ -24,7 +24,7 @@ jobs:
           # Must be relative path from root
           paths:
             - echo-output
-  two:
+  test:
     docker:
       - image: ubuntu:18.04
         auth:
@@ -58,16 +58,20 @@ jobs:
       - run: bash .c;
 
 
-
 workflows:
   version: 2
-  one_and_two:
+  build_and_test:
     jobs:
-      #- one
+      - build
+      - test:
+        requires:
+            - build
       - comment
+        requires:
+            - test
       #  requires:
-      #      - one
-      #- two:
+      #      - build
+      #- test:
       #    requires:
-      #      - one
+      #      - build
 
