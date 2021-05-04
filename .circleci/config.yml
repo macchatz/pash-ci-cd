@@ -35,7 +35,7 @@ jobs:
       - checkout
       - attach_workspace:
             at: my_workspace
-      - run: cd /pash
+      - run: echo $PWD
       - run: git checkout top-level-tests
       - run: echo 'Running tests'
       - run: echo $PWD
