@@ -68,6 +68,7 @@ workflows:
             - build
       - comment
         requires
+            - build
             - test
       #  requires:
       #      - build
