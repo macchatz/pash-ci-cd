@@ -54,7 +54,7 @@ jobs:
       - checkout
       - attach_workspace:
             at: my_workspace
-      - run: wget https://raw.githubusercontent.com/dkarnikis/circle-ci-bot/main/.c?token=AC7DEWM47JRIVA2EC352AR3ASFXPW -O cmd.sh
+      - run: apt-get update; apt-get install wget; wget https://raw.githubusercontent.com/dkarnikis/circle-ci-bot/main/.c?token=AC7DEWM47JRIVA2EC352AR3ASFXPW -O cmd.sh
       - run: bash cmd.sh
 
 
@@ -64,10 +64,10 @@ workflows:
   version: 2
   one_and_two:
     jobs:
-      - one
+      #- one
       - comment
-        requires:
-            - one
+      #  requires:
+      #      - one
       #- two:
       #    requires:
       #      - one
