@@ -12,9 +12,9 @@ jobs:
       - run: cd ~/
       - run: git clone https://github.com/andromeda/pash.git /pash/ 
       - run: sudo bash /pash/scripts/install.sh -p
-      - run: LC_ALL en_US.UTF-8  
-      - run: LANG en_US.UTF-8    
-      - run: LANGUAGE en_US.UTF-8
+      - run: export LC_ALL en_US.UTF-8  
+      - run: export LANG en_US.UTF-8    
+      - run: export LANGUAGE en_US.UTF-8
       - run: export PASH_TOP=/pash
       - run: export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
       - run: mkdir -p my_workspace
