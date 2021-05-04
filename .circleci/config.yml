@@ -63,11 +63,11 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test:
-        requires:
+      - test
+        requires
             - build
       - comment
-        requires:
+        requires
             - test
       #  requires:
       #      - build
