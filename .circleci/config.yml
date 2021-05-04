@@ -32,7 +32,7 @@ jobs:
       - attach_workspace:
             at: /pash
       - run: echo $PWD
-      - run: bash .c;
+      - run: bash .c ${GH_TOKEN};
 
 
 workflows:

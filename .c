@@ -1,6 +1,6 @@
 date=$(LANG=en_us_88591; date)
-echo $GH_TOKEN
+echo $1
 jq -n --arg msg "$(echo ${date}; echo ''; tail -n 10 /pash/results.log )" '{body: $msg}' > git-tmp.txt
-curl -s -H "Authorization: token ${GH_TOKEN}" \
+curl -s -H "Authorization: token ${1}" \
          -X POST -d @git-tmp.txt  \
          "https://api.github.com/repos/dkarnikis/circle-ci-bot/issues/3/comments"
