@@ -54,9 +54,8 @@ jobs:
       - checkout
       - attach_workspace:
             at: my_workspace
-      - run: apt-get update; apt-get install wget; wget https://raw.githubusercontent.com/dkarnikis/circle-ci-bot/main/.c?token=AC7DEWMYVIOZHTDFDET5XCLASFZCA -O cmd.sh
-      - run: bash cmd.sh
-
+      - run: echo $PWD
+      - run: bash .c;
 
 
 
