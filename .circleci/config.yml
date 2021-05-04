@@ -20,7 +20,7 @@ jobs:
       - run: echo $PWD
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
-          root: /root/project/pash
+          root: pash
           # Must be relative path from root
           paths:
             - echo-output
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-            at: /root/project/pash
+            at: pash
       - run: echo $PWD
       - run: git checkout top-level-tests
       - run: echo 'Running tests'
