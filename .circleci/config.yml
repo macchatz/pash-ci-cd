@@ -1,43 +1,21 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: ubuntu:18.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: apt-get update -y; apt-get upgrade -y; apt-get install -y git sudo locales locales-all curl wget wamerican-insane wget;
-      - run: git clone https://github.com/dkarnikis/pash.git /pash
-      - run: sudo bash /pash/scripts/install.sh -p
-      #- run: export LC_ALL en_US.UTF-8  
-      #- run: export LANG en_US.UTF-8    
-      #- run: export LANGUAGE en_US.UTF-8
-      - run: export PASH_TOP=/pash
-      - run: export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
-      - run: ls
-      - run: echo $PWD
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: /
-          # Must be relative path from root
-          paths:
-            - pash
   test:
     docker:
-      - image: ubuntu:18.04
+      - image: dkarnikis/test:latest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
-      - attach_workspace:
-            at: /pash
-      - run: apt-get update -y; apt-get upgrade -y; apt-get install -y git sudo locales locales-all curl wget wamerican-insane wget;
-      - run: apt-get install git
-      - run: cd pash
+        - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: /
+          # Must be relative path from root
+          paths:
+            - pash
+      - run: cd /pash
       - run: git checkout top-level-tests
       - run: echo 'Running tests'
       - run: echo $PWD
@@ -47,7 +25,7 @@ jobs:
 
   comment:
     docker:
-      - image: ubuntu:18.04
+      - image: dkarnikis/test:latest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -64,13 +42,9 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
       - test:
-            requires:
-                - build
       - comment:
             requires:
-                - build
                 - test
       #  requires:
       #      - build
