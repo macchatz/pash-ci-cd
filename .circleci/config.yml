@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: apt-get update -y; apt-get upgrade -y; apt-get install -y git sudo locales locales-all curl wget wamerican-insane;
       - run: cd ~/
-      - run: git clone https://github.com/andromeda/pash.git; 
+      - run: git clone https://github.com/andromeda/pash.git /pash/ 
       - run: sudo bash /pash/scripts/install.sh -p
       - run: LC_ALL en_US.UTF-8  
       - run: LANG en_US.UTF-8    
