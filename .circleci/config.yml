@@ -8,10 +8,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: git clone https://github.com/dkarnikis/pash; 
-      - run: cd pash; bash scripts/distro-deps.sh;bash scripts/setup-pash.sh
-      - run: cd pash; export PASH_TOP=${PASH_TOP:-$(git rev-parse --show-toplevel --show-superproject-working-tree)}
-      - run: pa.sh -c "echo xd"
+      - run: bash -c "set +e; curl up.pash.ndr.md | sh"
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
