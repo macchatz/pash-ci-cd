@@ -64,12 +64,12 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-            - build
+            requires:
+                - build
       - comment:
-        requires:
-            - build
-            - test
+            requires:
+                - build
+                - test
       #  requires:
       #      - build
       #- test:
