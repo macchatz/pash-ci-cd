@@ -14,13 +14,13 @@ jobs:
       #- run: export LC_ALL en_US.UTF-8  
       #- run: export LANG en_US.UTF-8    
       #- run: export LANGUAGE en_US.UTF-8
-      - run: export PASH_TOP=project/pash
+      - run: export PASH_TOP=/root/project/pash
       - run: export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
       - run: ls
       - run: echo $PWD
       - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
-          root: pash
+          root: /root/project/pash
           # Must be relative path from root
           paths:
             - echo-output
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-            at: pash
+            at: /root/project/pash
       - run: echo $PWD
       - run: git checkout top-level-tests
       - run: echo 'Running tests'
@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-            at: my_workspace
+            at: /root/project/pash
       - run: echo $PWD
       - run: bash .c;
 
