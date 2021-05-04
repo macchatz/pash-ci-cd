@@ -15,7 +15,7 @@ jobs:
       - run: echo 'Running tests'
       - run: echo $PWD
       - run: bash ./run_tests.sh > results.log 2>&1
-        - persist_to_workspace:
+      - persist_to_workspace:
           # Must be an absolute path, or relative path from working_directory
           root: /pash
           # Must be relative path from root
@@ -41,7 +41,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - test:
+      - test
       - comment:
             requires:
                 - test
