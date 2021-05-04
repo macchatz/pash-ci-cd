@@ -64,7 +64,7 @@ workflows:
   version: 2
   one_and_two:
     jobs:
-      - comment:
+      - comment
       #- one
       #- two:
       #    requires:
