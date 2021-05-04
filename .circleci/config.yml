@@ -21,6 +21,7 @@ jobs:
             - results.log
 
   comment:
+    context: xd
     docker:
       - image: dkarnikis/test:latest
         auth:
