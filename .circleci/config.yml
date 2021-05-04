@@ -2,7 +2,7 @@ version: 2
 jobs:
   one:
     docker:
-      - image: archlinux
+      - image: ubuntu
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
