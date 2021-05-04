@@ -39,14 +39,32 @@ jobs:
       - run: git checkout top-level-tests
       - run: echo 'Running tests'
       - run: echo $PWD
-      #- run: bash ./run_tests.sh
-      #- run: echo "Trying out workspaces" > my_workspace/echo-output
+      - run: bash ./run_tests.sh > results.log 2>&1
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+
+
+  comment:
+    docker:
+      - image: ubuntu:18.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - attach_workspace:
+            at: my_workspace
+      - run: curl   -X POST   -H "Accept: application/vnd.github.v3+json"   -H "Authorization: Bearer $GH_TOKEN"   https://api.github.com/repos/dkarnikis/circle-ci-bot/pull/3/comments   -d '{"body":"Hello Github!"}'
+
+
+
 workflows:
   version: 2
   one_and_two:
     jobs:
-      - one
-      - two:
-          requires:
-            - one
+      - comment:
+      #- one
+      #- two:
+      #    requires:
+      #      - one
 
