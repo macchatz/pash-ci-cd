@@ -2,13 +2,20 @@ version: 2
 jobs:
   one:
     docker:
-      - image: ubuntu
+      - image: ubuntu:18.04
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: apt-get update; apt-get install -y git curl sudo; sudo su; curl up.pash.ndr.md | sh
+      - run: apt-get update -y; apt-get upgrade -y; apt-get install -y git sudo locales locales-all curl wget wamerican-insane;
+      - run: git clone https://github.com/andromeda/pash.git; 
+      - run: sudo bash /pash/scripts/install.sh -p
+      - run: LC_ALL en_US.UTF-8  
+      - run: LANG en_US.UTF-8    
+      - run: LANGUAGE en_US.UTF-8
+      - run: export PASH_TOP=/pash
+      - run: export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
@@ -17,30 +24,8 @@ jobs:
           # Must be relative path from root
           paths:
             - echo-output
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
-
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
 workflows:
   version: 2
   one_and_two:
     jobs:
       - one
-      - two:
-          requires:
-            - one
