@@ -41,7 +41,7 @@ workflows:
   build_and_test:
     jobs:
       #- test
-      - comment:
+      - comment
       #      requires:
       #          - test
       #  requires:
