@@ -34,7 +34,6 @@ jobs:
       - run: echo $PWD
       - run: bash .c ${GH_TOKEN};
 
-
 workflows:
   version: 2
   build_and_test:
