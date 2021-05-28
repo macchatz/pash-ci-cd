@@ -30,7 +30,7 @@ jobs:
         steps:
 #          - uses: unsplash/comment-on-pr@master
           - uses: actions/checkout@v2 
-          - name: Running Pash Benchmarks
+          - name: Running-Pash-Benchmarks
             run: |
               pw=$PWD                                           
               cd /pash/                                         
