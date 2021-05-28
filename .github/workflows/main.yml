@@ -30,7 +30,8 @@ jobs:
             image: dkarnikis/test:latest
         steps:
             - name: super-step
-              uses: actions/checkout@v2
+            - uses: actions/checkout@v2
+            - uses: actions-ecosystem/action-create-comment@v1
             - name: pash
               shell: bash
               run: |
@@ -44,6 +45,7 @@ jobs:
                 #cp results.log 
 
             - name: Add comment to PR
+
               env:
                 #if: ${{ github.event_name == 'pull_request' }}
                 gev: ${{ github.event_name }}
@@ -53,9 +55,7 @@ jobs:
                 echo $gev
                 echo $URL
                 echo $GITHUB_TOKEN
-                curl \
-                  -X POST \
-                  $URL \
-                  -H "Content-Type: application/json" \
-                  -H "Authorization: token $GITHUB_TOKEN" \
-                  --data '{ "body": "blah blah" }'
+                with:
+                  github_token: ${{ secrets.github_token }}
+                  body: |
+                    Hello, @${{ github.actor }}!
