@@ -22,10 +22,17 @@ jobs:
             image: dkarnikis/test:latest
 
         steps:
+            - name: xd
             - name: super-step
               shell: bash
               run: |
                 ls
                 ls /
                 ls ~/
+                echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+                echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+                echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+                ls ${{ github.workspace }}
                 echo "--This is running in my custom Docker image--"
+            
+             
