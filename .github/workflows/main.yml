@@ -38,12 +38,12 @@ jobs:
               git pull                                         
               git checkout top-level-tests                     
               cd scripts                                       
-              bash run_tests.sh                                
-              bash parse.sh > results.log 2>&1                 
-              VER=$(cat results.log | sed -z 's/\n/,/g' )
+              #bash run_tests.sh                                
+              #bash parse.sh > results.log 2>&1                 
+              #VER=$(cat results.log | sed -z 's/\n/,/g' )
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              FINAL=$(echo $date\n$VER)
+              FINAL=$(echo $date\nhahaxd)
               echo $FINAL              
               echo "VERSION<<$FINAL" >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
