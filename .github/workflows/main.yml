@@ -43,7 +43,7 @@ jobs:
               #VER=$(cat results.log | sed -z 's/\n/,/g' )
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              FINAL=$(echo $date\nhahaxd)
+              FINAL=$(ls -la)
               echo $FINAL              
               echo "VERSION<<$FINAL" >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
