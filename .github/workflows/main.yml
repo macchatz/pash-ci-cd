@@ -23,15 +23,14 @@ on:
 
 # Jobs section
 jobs:
-    # The job that will use the container image you just pushed to ghcr.
-    super-job:
+    Pash Tests:
         runs-on: ubuntu-18.04
         container:
             image: dkarnikis/test:latest
         steps:
 #          - uses: unsplash/comment-on-pr@master
           - uses: actions/checkout@v2 
-          - name: Run pash
+          - name: Running Pash Benchmarks
             run: |
               pw=$PWD                                           
               cd /pash/                                         
@@ -49,7 +48,7 @@ jobs:
               cat results.log >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
 
-          - name: posting
+          - name: Posting Results
             uses: unsplash/comment-on-pr@master
 
             env:
