@@ -45,7 +45,7 @@ jobs:
               FINAL=$(cat /proc/cpuinfo)
               echo $FINAL              
               echo "VERSION<<EOF" >> $GITHUB_ENV
-              echo -e "$date\n" >> $GITHUB_ENV
+              echo "$date\n" >> $GITHUB_ENV
               cat results.log >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
 
