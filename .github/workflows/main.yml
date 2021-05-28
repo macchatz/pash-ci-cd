@@ -30,13 +30,12 @@ jobs:
             image: dkarnikis/test:latest
         steps:
             - name: super-step
-            - uses: actions/checkout@v2
-            - uses: actions-ecosystem/action-create-comment@v1
-            - name: pash
-              shell: bash
-              run: |
-                pw=$PWD
-                cd /pash/
+
+            #- name: pash
+            #  shell: bash
+            #  run: |
+            #    pw=$PWD
+            #    cd /pash/
                 #git pull
                 #git checkout top-level-tests
                 #cd scripts
@@ -45,7 +44,6 @@ jobs:
                 #cp results.log 
 
             - name: Add comment to PR
-
               env:
                 #if: ${{ github.event_name == 'pull_request' }}
                 gev: ${{ github.event_name }}
@@ -54,8 +52,5 @@ jobs:
               run: |
                 echo $gev
                 echo $URL
-                echo $GITHUB_TOKEN
-                with:
-                  github_token: ${{ secrets.github_token }}
-                  body: |
-                    Hello, @${{ github.actor }}!
+                echo ${GITHUB_TOKEN}
+                
