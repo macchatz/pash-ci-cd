@@ -29,7 +29,9 @@ jobs:
         container:
             image: dkarnikis/test:latest
         steps:
-          - name: super-step                                    
+          - uses: unsplash/comment-on-pr@master
+
+          - name: super-step          
             uses: actions/checkout@v2                           
 #          - name: pash                                          
 #            shell: bash                                         
@@ -45,11 +47,15 @@ jobs:
                                                                 
 
           - name: comment PR
-            uses: unsplash/comment-on-pr@master
+            run: |
+              v=$(ls -la)
+              echo "VERSION=$v" >> $GITHUB_ENV
+              
+          - name: posting
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
-              msg: "Check out this message!"
+              msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false  # OPTIONAL 
 
   #
