@@ -4,7 +4,7 @@ name: CI
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for th
   push: 
     branches: [ main ]
   pull_request:
@@ -23,7 +23,7 @@ on:
 
 # Jobs section
 jobs:
-    # The job that will use the container image you just pushed to ghcr.io
+    # The job that will use the container image you just pushed to ghcr.
     super-job:
         runs-on: ubuntu-18.04
         container:
@@ -31,38 +31,28 @@ jobs:
         steps:
 #          - uses: unsplash/comment-on-pr@master
           - uses: actions/checkout@v2 
-          - name: Set variables
+          - name: Run pash
             run: |
-              echo "lala" > version
-              VER=$(cat version)
-              echo "VERSION=$VER" >> $GITHUB_ENV
+              pw=$PWD                                           
+              cd /pash/                                         
+              git pull                                         
+              git checkout top-level-tests                     
+              cd scripts                                       
+              bash run_tests.sh                                
+              bash parse.sh > results.log 2>&1                 
+              VER=$(cat results.log)
+              echo "RESULTS_LOG=$VER" >> $GITHUB_ENV
 
           - name: Build Docker Image
             run: |
               echo "${{ env.VERSION }}"
-#          - name: super-step          
-                          
-#          - name: pash                                          
-#            shell: bash                                         
-#            run: |                                              
-#              pw=$PWD                                           
-#              cd /pash/                                         
-              #git pull                                         
-              #git checkout top-level-tests                     
-              #cd scripts                                       
-              #bash run_tests.sh                                
-              #bash parse.sh > results.log 2>&1                 
-              #cp results.log                                   
-                                                                
-
-              
           - name: posting
             uses: unsplash/comment-on-pr@master
 
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
-              msg: "${{ env.VERSION }}"
+              msg: "${{ env.RESULTS_LOG }}"
               check_for_duplicate_msg: false  # OPTIONAL 
 
   #
