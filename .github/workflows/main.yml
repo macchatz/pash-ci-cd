@@ -29,28 +29,35 @@ jobs:
         container:
             image: dkarnikis/test:latest
         steps:
-            - name: super-step
-
-            #- name: pash
-            #  shell: bash
-            #  run: |
-            #    pw=$PWD
-            #    cd /pash/
-                #git pull
-                #git checkout top-level-tests
-                #cd scripts
-                #bash run_tests.sh
-                #bash parse.sh > results.log 2>&1
-                #cp results.log 
-
-            - name: Add comment to PR
-              env:
-                #if: ${{ github.event_name == 'pull_request' }}
-                gev: ${{ github.event_name }}
-                URL: ${{ github.event.issue.comments_url }}
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                echo $gev
-                echo $URL
-                echo ${GITHUB_TOKEN}
-                
+          - name: super-step                                    
+            uses: actions/checkout@v2                           
+#          - name: pash                                          
+#            shell: bash                                         
+#            run: |                                              
+#              pw=$PWD                                           
+#              cd /pash/                                         
+              #git pull                                         
+              #git checkout top-level-tests                     
+              #cd scripts                                       
+              #bash run_tests.sh                                
+              #bash parse.sh > results.log 2>&1                 
+              #cp results.log                                   
+                                                                
+          - name: Add comment to PR                             
+            env:                                                
+              if: ${{ github.event_name == 'pull_request' }}    
+              gev: ${{ github.event_name }}                     
+              URL: ${{ github.event.issue.comments_url }}       
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}         
+            run: |                                              
+              echo $gev                                         
+              echo $URL                                         
+              echo $GITHUB_TOKEN
+              echo $GITHUB_CONTEXT
+              curl \                                            
+                -X POST \                                       
+                $URL \                                          
+                -H "Content-Type: application/json" \           
+                -H "Authorization: token $GITHUB_TOKEN" \       
+                --data '{ "body": "blah blah" }'                
+                                                                
