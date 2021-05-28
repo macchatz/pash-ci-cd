@@ -51,7 +51,7 @@ jobs:
               
               VER=$(cat haha)
               echo $VER
-              echo "VERSION=$(cat haha)" >> $GITHUB_ENV
+              echo "VERSION=$(git status)" >> $GITHUB_ENV
           - name: posting
             uses: unsplash/comment-on-pr@master
 
