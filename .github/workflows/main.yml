@@ -32,12 +32,12 @@ jobs:
               run: |
                 pw=$PWD
                 cd /pash/
-                git pull
-                git checkout top-level-tests
-                cd scripts
-                bash run_tests.sh
-                bash parse.sh > results.log 2>&1
-                cp results.log 
+                #git pull
+                #git checkout top-level-tests
+                #cd scripts
+                #bash run_tests.sh
+                #bash parse.sh > results.log 2>&1
+                #cp results.log 
 
             - name: Add comment to PR
               if: contains(github.event.comment.body, 'special string')
