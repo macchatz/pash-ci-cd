@@ -40,8 +40,8 @@ jobs:
               cd scripts                                       
               bash run_tests.sh                                
               bash parse.sh > results.log 2>&1                 
-              VER=$(cat results.log)
-              echo "VERSION=$VER" >> $GITHUB_ENV
+              VER=$(cat results.log | sed -z 's/\n/,/g' )
+              echo "VERSION=\"$VER\"" >> $GITHUB_ENV
               echo "${{ env.VERSION }}"
              
           - name: posting
