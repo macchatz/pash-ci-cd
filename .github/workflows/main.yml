@@ -46,9 +46,10 @@ jobs:
 
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              # generate the json for the gh message
-              jq -n --arg msg "$(echo ${date}; echo ''; ls -la )" '{body: $msg}' > git-tmp.txt
-              VER=$(cat git-tmp.txt)
+              echo $date > haha
+              echo hihi >> haha
+              
+              VER=$(cat haha)
               echo $VER
               echo "VERSION=\"$VER\"" >> $GITHUB_ENV
           - name: posting
