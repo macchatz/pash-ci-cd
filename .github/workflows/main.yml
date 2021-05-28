@@ -31,7 +31,14 @@ jobs:
         steps:
           - uses: unsplash/comment-on-pr@master
           - uses: actions/checkout@v2 
+          - name: Set variables
+            run: |
+              VER=$(cat VERSION)
+              echo "VERSION=$VER" >> $GITHUB_ENV
 
+          - name: Build Docker Image
+            run: |
+              echo "${{ env.VERSION }}
 #          - name: super-step          
                           
 #          - name: pash                                          
@@ -47,17 +54,13 @@ jobs:
               #cp results.log                                   
                                                                 
 
-          - name: comment PR
-            run: |
-              v=$(ls -la)
-              echo "VERSION=$v" >> $GITHUB_ENV
               
-          - name: posting
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            with:
-              msg: "${{ env.VERSION }}"
-              check_for_duplicate_msg: false  # OPTIONAL 
+#          - name: posting
+#            env:
+#              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#            with:
+#              msg: "${{ env.VERSION }}"
+#              check_for_duplicate_msg: false  # OPTIONAL 
 
   #
 #            run: |                                              
