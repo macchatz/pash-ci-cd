@@ -20,18 +20,18 @@ jobs:
           paths:
             - results.log
 
-  comment:
-    docker:
-      - image: dkarnikis/test:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    steps:
-      - checkout
-      - attach_workspace:
-            at: /pash
-      - run: echo $PWD; ls
+#  comment:
+#    docker:
+#      - image: dkarnikis/test:latest
+#        auth:
+#          username: mydockerhub-user
+#          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+#
+#    steps:
+#      - checkout
+#      - attach_workspace:
+#            at: /pash
+#      - run: echo $PWD; ls
       #- run: bash .c ${GH_TOKEN};
 
 workflows:
