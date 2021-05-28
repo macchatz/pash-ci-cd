@@ -43,9 +43,10 @@ jobs:
               #VER=$(cat results.log | sed -z 's/\n/,/g' )
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              FINAL=$(ls -la)
+              FINAL=$(cat /proc/cpuinfo)
               echo $FINAL              
-              echo "VERSION<<$FINAL" >> $GITHUB_ENV
+              echo "VERSION<<EOF" >> $GITHUB_ENV
+              echo "$FINAL" >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
 
           - name: posting
