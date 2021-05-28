@@ -45,7 +45,7 @@ jobs:
 
             - name: Add comment to PR
               env:
-                if: ${{ github.event_name == 'pull_request' }}
+                #if: ${{ github.event_name == 'pull_request' }}
                 gev: ${{ github.event_name }}
                 URL: ${{ github.event.issue.comments_url }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
