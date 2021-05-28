@@ -18,7 +18,7 @@ jobs:
           root: /pash
           # Must be relative path from root
           paths:
-            - results.log
+            - /pash/scripts/results.log
 
   comment:
     docker:
