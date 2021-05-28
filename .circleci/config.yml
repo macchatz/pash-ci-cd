@@ -13,12 +13,12 @@ jobs:
       - run: echo 'Running tests'
       - run: echo $PWD
       - run: cd /pash/scripts;bash ./run_tests.sh; bash parse.sh > results.log 2>&1; cp ~/project/.c .; bash .c ${GH_TOKEN};
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: /pash
-          # Must be relative path from root
-          paths:
-            - results.log
+      #- persist_to_workspace:
+      #    # Must be an absolute path, or relative path from working_directory
+      #    root: /pash
+      #    # Must be relative path from root
+      #    paths:
+      #      - results.log
 
 #  comment:
 #    docker:
