@@ -46,12 +46,12 @@ jobs:
 
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              echo $date > haha
+              echo "$date\n" > haha
               echo hihi >> haha
               
               VER=$(cat haha)
               echo $VER
-              echo "VERSION=\"$VER\"" >> $GITHUB_ENV
+              echo "VERSION="\"$VER\"" >> $GITHUB_ENV
           - name: posting
             uses: unsplash/comment-on-pr@master
 
