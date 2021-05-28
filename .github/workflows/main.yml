@@ -36,4 +36,9 @@ jobs:
                 cd /pash/
                 git pull
                 git checkout top-level-tests
-
+                cd scripts
+                bash run_tests.sh
+                bash parse.sh > results.log 2>&1
+                cp results.log /
+                cd /
+                ls -la
