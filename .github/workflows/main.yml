@@ -43,21 +43,42 @@ jobs:
               #bash parse.sh > results.log 2>&1                 
               #cp results.log                                   
                                                                 
-          - name: Add comment to PR                             
-            env:                                                
-              if: ${{ github.event_name == 'pull_request' }}    
-              gev: ${{ github.event_name }}                     
-              URL: ${{ github.event.issue.comments_url }}       
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}         
-            run: |                                              
-              echo $gev                                         
-              echo $URL                                         
-              echo $GITHUB_TOKEN
-              echo $GITHUB_CONTEXT
-              curl \                                            
-                -X POST \                                       
-                $URL \                                          
-                -H "Content-Type: application/json" \           
-                -H "Authorization: token $GITHUB_TOKEN" \       
-                --data '{ "body": "blah blah" }'                
+          - name: Dump GitHub context
+            env:
+              GITHUB_CONTEXT: ${{ toJSON(github) }}
+            run: echo "$GITHUB_CONTEXT"
+          - name: Dump job context
+            env:
+              JOB_CONTEXT: ${{ toJSON(job) }}
+            run: echo "$JOB_CONTEXT"
+          - name: Dump steps context
+            env:
+              STEPS_CONTEXT: ${{ toJSON(steps) }}
+            run: echo "$STEPS_CONTEXT"
+          - name: Dump runner context
+            env:
+              RUNNER_CONTEXT: ${{ toJSON(runner) }}
+            run: echo "$RUNNER_CONTEXT"
+          - name: Dump strategy context
+            env:
+              STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+            run: echo "$STRATEGY_CONTEXT"
+          - name: Dump matrix context
+            env:
+              MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+            run: echo "$MATRIX_CONTEXT"
+
+
+#
+#            run: |                                              
+#              echo $gev                                         
+#              echo $URL                                         
+#              echo $GITHUB_TOKEN
+#              echo $GITHUB_CONTEXT
+#              curl \                                            
+#                -X POST \                                       
+#                $URL \                                          
+#                -H "Content-Type: application/json" \           
+#                -H "Authorization: token $GITHUB_TOKEN" \       
+#                --data '{ "body": "blah blah" }'                
                                                                 
