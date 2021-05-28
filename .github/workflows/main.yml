@@ -48,6 +48,7 @@ jobs:
               date=$(LANG=en_us_88591; date)
               # generate the json for the gh message
               jq -n --arg msg "$(echo ${date}; echo ''; ls -la )" '{body: $msg}' > git-tmp.txt
+              VER=$(cat git-tmp.txt)
               echo "VERSION=$VER" >> $GITHUB_ENV
           - name: posting
             uses: unsplash/comment-on-pr@master
