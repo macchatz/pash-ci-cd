@@ -40,10 +40,15 @@ jobs:
               cd scripts                                       
               bash run_tests.sh                                
               bash parse.sh > results.log 2>&1                 
-              VER=$(cat results.log | sed -z 's/\n/,/g' )
-              echo "VERSION=\"$VER\"" >> $GITHUB_ENV
-              echo "${{ env.VERSION }}"
-             
+              #VER=$(cat results.log | sed -z 's/\n/,/g' )
+              #echo "VERSION=\"$VER\"" >> $GITHUB_ENV
+              #echo "${{ env.VERSION }}"
+
+              # get the timer in english
+              date=$(LANG=en_us_88591; date)
+              # generate the json for the gh message
+              jq -n --arg msg "$(echo ${date}; echo ''; ls -la )" '{body: $msg}' > git-tmp.txt
+              echo "VERSION=$VER" >> $GITHUB_ENV
           - name: posting
             uses: unsplash/comment-on-pr@master
 
