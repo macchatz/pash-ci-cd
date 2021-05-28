@@ -26,8 +26,8 @@ jobs:
             
             - name: Install dependencies
               run: |
-                
-                find . -name "circle-ci-bot" -type d
+                ls -la 
+
 
  
             - name: pash
@@ -36,16 +36,4 @@ jobs:
                 cd /pash/
                 git pull
                 git checkout top-level-tests
-                
-            
-            - name: test
-              shell: bash
-              run: |
-                ls
-                ls /
-                ls ~/
-                echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-                echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-                echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-                
-                echo "--This is running in my custom Docker image--"
+
