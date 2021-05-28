@@ -31,8 +31,8 @@ jobs:
       - checkout
       - attach_workspace:
             at: /pash
-      - run: echo $PWD
-      - run: bash .c ${GH_TOKEN};
+      - run: echo $PWD; ls
+      #- run: bash .c ${GH_TOKEN};
 
 workflows:
   version: 2
