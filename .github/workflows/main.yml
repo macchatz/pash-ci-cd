@@ -33,7 +33,7 @@ jobs:
           - uses: actions/checkout@v2 
           - name: Set variables
             run: |
-              VER=$(cat VERSION)
+              VER=$(ls -la)
               echo "VERSION=$VER" >> $GITHUB_ENV
 
           - name: Build Docker Image
