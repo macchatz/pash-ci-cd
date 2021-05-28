@@ -46,6 +46,8 @@ jobs:
               FINAL=$(echo $date\n$VER)
               echo $FINAL              
               echo "VERSION<<$FINAL" >> $GITHUB_ENV
+              echo 'EOF' >> $GITHUB_ENV
+
           - name: posting
             uses: unsplash/comment-on-pr@master
 
