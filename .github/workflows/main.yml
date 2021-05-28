@@ -38,20 +38,14 @@ jobs:
               git pull                                         
               git checkout top-level-tests                     
               cd scripts                                       
-              #bash run_tests.sh                                
-              #bash parse.sh > results.log 2>&1                 
-              #VER=$(cat results.log | sed -z 's/\n/,/g' )
-              #echo "VERSION=\"$VER\"" >> $GITHUB_ENV
-              #echo "${{ env.VERSION }}"
-
+              bash run_tests.sh                                
+              bash parse.sh > results.log 2>&1                 
+              VER=$(cat results.log | sed -z 's/\n/,/g' )
               # get the timer in english
               date=$(LANG=en_us_88591; date)
-              echo "$date\n" > haha
-              echo hihi >> haha
-              
-              VER=$(cat haha)
-              echo $VER
-              echo "VERSION=$(git status)" >> $GITHUB_ENV
+              FINAL=$(echo $date\n$VER)
+              echo $FINAL              
+              echo "VERSION<<$FINAL" >> $GITHUB_ENV
           - name: posting
             uses: unsplash/comment-on-pr@master
 
