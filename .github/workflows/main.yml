@@ -23,9 +23,12 @@ jobs:
         steps:
             - name: super-step
               uses: actions/checkout@v2
+            
             - name: Install dependencies
               run: |
-                ls /home/runner/work/circle-ci-bot/
+                ls /home/runner/
+                ls /home/runner/
+                find . -name "circle-ci-bot" -type d
 
  
             - name: pash
