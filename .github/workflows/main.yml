@@ -56,12 +56,12 @@ jobs:
                                                                 
 
               
-#          - name: posting
-#            env:
-#              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#            with:
-#              msg: "${{ env.VERSION }}"
-#              check_for_duplicate_msg: false  # OPTIONAL 
+          - name: posting
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              msg: "${{ env.VERSION }}"
+              check_for_duplicate_msg: false  # OPTIONAL 
 
   #
 #            run: |                                              
