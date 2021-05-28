@@ -41,18 +41,16 @@ jobs:
               bash run_tests.sh                                
               bash parse.sh > results.log 2>&1                 
               VER=$(cat results.log)
-              echo "RESULTS_LOG=$VER" >> $GITHUB_ENV
-
-          - name: Build Docker Image
-            run: |
+              echo "VERSION=$VER" >> $GITHUB_ENV
               echo "${{ env.VERSION }}"
+             
           - name: posting
             uses: unsplash/comment-on-pr@master
 
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
-              msg: "${{ env.RESULTS_LOG }}"
+              msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false  # OPTIONAL 
 
   #
