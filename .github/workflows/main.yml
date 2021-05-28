@@ -21,7 +21,6 @@ jobs:
         container:
             image: dkarnikis/test:latest
         steps:
-            - name: xd
             - name: super-step
               shell: bash
               run: |
