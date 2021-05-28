@@ -23,7 +23,7 @@ on:
 
 # Jobs section
 jobs:
-    Pash Tests:
+    Pash-Tests:
         runs-on: ubuntu-18.04
         container:
             image: dkarnikis/test:latest
