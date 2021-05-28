@@ -25,6 +25,7 @@ jobs:
             - name: super-step
               shell: bash
               run: |
-                # Whatever commands you want to run here using the container with your
-                # new Docker image at ghcr.io!>
+                ls
+                ls /
+                ls ~/
                 echo "--This is running in my custom Docker image--"
