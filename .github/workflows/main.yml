@@ -22,6 +22,16 @@ jobs:
             image: dkarnikis/test:latest
         steps:
             - name: super-step
+              uses: actions/checkout@v2
+            - name: pash
+              shell: bash
+              run: |
+                cd /pash/
+                git pull
+                git checkout top-level-tests
+                
+            
+            - name: test
               shell: bash
               run: |
                 ls
@@ -32,5 +42,3 @@ jobs:
                 echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
                 ls ${{ github.workspace }}
                 echo "--This is running in my custom Docker image--"
-            
-             
