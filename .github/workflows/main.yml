@@ -32,7 +32,7 @@ jobs:
           - uses: unsplash/comment-on-pr@master
 
           - name: super-step          
-            uses: actions/checkout@v2                           
+                          
 #          - name: pash                                          
 #            shell: bash                                         
 #            run: |                                              
@@ -52,6 +52,7 @@ jobs:
               echo "VERSION=$v" >> $GITHUB_ENV
               
           - name: posting
+            uses: actions/checkout@v2 
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
