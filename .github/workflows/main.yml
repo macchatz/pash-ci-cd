@@ -58,7 +58,6 @@ jobs:
               check_for_duplicate_msg: false
           - name: Exit-code
             run: |
-              cd /pash/scripts/log_results
-              cat failed.log
-              wc -l failed.log
-              [ "$(wc -l failed.log | awk '{print $1}')" -ne 1 ] && exit 1
+              cd /pash/scripts/
+              bash exit_code.sh
+         
