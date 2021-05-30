@@ -61,4 +61,4 @@ jobs:
               cd /pash/scripts/log_results
               cat failed.log
               wc -l failed.log
-              #[ "$(wc -l failed.log | awk '{print $1}')" -ne 2 ] && exit 1
+              [ "$(wc -l failed.log | awk '{print $1}')" -ne 1 ] && exit 1
