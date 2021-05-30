@@ -59,4 +59,4 @@ jobs:
           - name: Exit-code
             run: |
               cd /pash/scripts/log_results
-              [ "$( wc -l < failed.log )" -^C 1 ] && exit 1
+              [ "$( wc -l < failed.log )" -ne 1 ] && exit 1
