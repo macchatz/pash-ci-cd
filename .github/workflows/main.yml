@@ -55,18 +55,8 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               msg: "${{ env.VERSION }}"
-              check_for_duplicate_msg: false  # OPTIONAL 
-
-  #
-#            run: |                                              
-#              echo $gev                                         
-#              echo $URL                                         
-#              echo $GITHUB_TOKEN
-#              echo $GITHUB_CONTEXT
-#              curl \                                            
-#                -X POST \                                       
-#                $URL \                                          
-#                -H "Content-Type: application/json" \           
-#                -H "Authorization: token $GITHUB_TOKEN" \       
-#                --data '{ "body": "blah blah" }'                
-                                                                
+              check_for_duplicate_msg: false
+          - name: Exit-code
+            run: |
+              cd /pash/scripts/log_results
+              [ "$( wc -l < failed.log )" -^C 1 ] && exit 1
