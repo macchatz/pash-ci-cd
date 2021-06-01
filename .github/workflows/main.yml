@@ -36,6 +36,8 @@ jobs:
           - name: Running-Pash-Benchmarks
             if: github.ref != 'refs/heads/master'
             run: |
+              echo ${{ github.ref }}
+              exit 0
               pw=$PWD                                           
               cd /pash/                                         
               git pull                                         
