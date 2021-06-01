@@ -3,20 +3,20 @@ name: Pash-Benchmark-Tests
 # execute the workflow only when we are pushing on a pull request 
 on: 
   pull_request:
-    #types: [assigned, opened, synchronize, reopened]
+    types: [assigned, opened, synchronize, reopened]
     # we should add all the paths that we should ignore 
     paths-ignore:
       - "docs/**"
       - "**/.github/workflows/main.yml"
       - '**/README.md'
-  push:
-    branches:
-      - '*'
-      - '!master'
-    paths-ignore:
-      - "docs/**"
-      - "**/.github/workflows/main.yml"
-      - '**/README.md'
+#  push:
+#    branches:
+#      - '*'
+#      - '!master'
+#    paths-ignore:
+#      - "docs/**"
+#      - "**/.github/workflows/main.yml"
+#      - '**/README.md'
 
     
   # Allows you to run this workflow manually from the Actions tab
