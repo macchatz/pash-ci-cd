@@ -1,12 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the action will run. 
+# execute the workflow only when we are pushing on a pull request 
 on: 
   pull_request:
     types: [opened, synchronize]
-    #branches: [main]
     paths-ignore:
       - "docs/**"
       - "**/.github/workflows/main.yml"
@@ -22,21 +19,24 @@ jobs:
             image: dkarnikis/test:latest
         steps:
           - uses: actions/checkout@v2 
+            # Fetches the latest changes and executes all the benchmarks
           - name: Running-Pash-Benchmarks
             run: |
-              pw=$PWD                                           
-              cd /pash/                                         
-              git pull                                         
-              git checkout top-level-tests                     
-              cd scripts                                       
-              bash run_tests.sh                                
-              bash parse.sh > results.log 2>&1                 
+              cd /pash/           
+              git pull           
+              git checkout top-level-tests
+              cd scripts
+              bash run_tests.sh  
+              bash parse.sh > results.log 2>&1  
               # get the timer in english
               date=$(LANG=en_us_88591; date)
               echo "VERSION<<EOF" >> $GITHUB_ENV
               echo "$date\n" >> $GITHUB_ENV
+              # Parses the results and construct a github message post
+              # we append the data to the global env
               cat results.log >> $GITHUB_ENV
               echo 'EOF' >> $GITHUB_ENV
+          # We post the results on the corresponding pull request thread
           - name: Posting Results
             uses: unsplash/comment-on-pr@master
             if: github.ref != 'refs/heads/main'
@@ -45,6 +45,8 @@ jobs:
             with:
               msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false
+          # Check the return code of the scripts. If one of the tests failed
+          # post the error
           - name: Exit-code
             run: |
               cd /pash/scripts/
