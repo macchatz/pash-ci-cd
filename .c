@@ -6,3 +6,4 @@ jq -n --arg msg "$(echo ${date}; echo ''; cat /pash/scripts/results.log )" '{bod
 curl -s -H "Authorization: token ${1}" \
          -X POST -d @git-tmp.txt  \
          "https://api.github.com/repos/dkarnikis/circle-ci-bot/issues/3/comments"
+s
