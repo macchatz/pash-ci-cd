@@ -6,16 +6,13 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for th
   push:
-    branches: 
-      - '*'
+
     paths-ignore:
       - "docs/**"
       - README.md
       - ".github/workflows/main.yml"
 
   pull_request:
-    branches:
-      - '*'
     paths-ignore:
       - "docs/**"
       - README.md
