@@ -3,10 +3,12 @@
 name: CI
 
 # Controls when the action will run. 
-on: [push, pull_request]
+on: 
+  pull_request:
+    #branches: [main]
     paths-ignore:
       - "docs/**"
-      - "*.md"
+      - README.md
       - ".github/workflows/main.yml"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
