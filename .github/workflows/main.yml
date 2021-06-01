@@ -32,10 +32,9 @@ jobs:
         container:
             image: dkarnikis/test:latest
         steps:
-#          - uses: unsplash/comment-on-pr@master
           - uses: actions/checkout@v2 
           - name: Running-Pash-Benchmarks
-            if: github.ref != 'refs/heads/main'
+            if: github.ref != 'refs/heads/master'
             run: |
               pw=$PWD                                           
               cd /pash/                                         
@@ -55,14 +54,14 @@ jobs:
 
           - name: Posting Results
             uses: unsplash/comment-on-pr@master
-            if: github.ref != 'refs/heads/main'
+            if: github.ref != 'refs/heads/master'
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false
           - name: Exit-code
-            if: github.ref != 'refs/heads/main'
+            if: github.ref != 'refs/heads/master'
             run: |
               cd /pash/scripts/
               bash exit_code.sh
