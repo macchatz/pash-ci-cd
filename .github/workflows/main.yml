@@ -28,13 +28,14 @@ on:
 # Jobs section
 jobs:
     Pash-Tests:
+        if: github.ref != 'refs/heads/main'
         runs-on: ubuntu-18.04
         container:
             image: dkarnikis/test:latest
         steps:
           - uses: actions/checkout@v2 
           - name: Running-Pash-Benchmarks
-            if: github.ref != 'refs/heads/master'
+            if: github.ref != 'refs/heads/main'
             run: |
               echo ${{ github.ref }}
               exit 0
@@ -56,14 +57,14 @@ jobs:
 
           - name: Posting Results
             uses: unsplash/comment-on-pr@master
-            if: github.ref != 'refs/heads/master'
+            if: github.ref != 'refs/heads/main'
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
               msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false
           - name: Exit-code
-            if: github.ref != 'refs/heads/master'
+            if: github.ref != 'refs/heads/main'
             run: |
               cd /pash/scripts/
               bash exit_code.sh
