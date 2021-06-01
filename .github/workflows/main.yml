@@ -35,7 +35,7 @@ jobs:
         steps:
           - uses: actions/checkout@v2 
           - name: Running-Pash-Benchmarks
-            if: github.ref != 'refs/heads/main'
+ 
             run: |
               echo ${{ github.ref }}
               exit 0
