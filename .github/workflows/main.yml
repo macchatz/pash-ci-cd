@@ -50,7 +50,6 @@ jobs:
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             with:
-              if 
               msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false
           - name: Exit-code
