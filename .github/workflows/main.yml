@@ -3,17 +3,7 @@
 name: CI
 
 # Controls when the action will run. 
-on:
-  # Triggers the workflow on push or pull request events but only for th
-  push:
-    #branches: [main]
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
-      - ".github/workflows/main.yml"
-
-  pull_request:
-    #branches: [main]
+on: [push, pull_request]
     paths-ignore:
       - "docs/**"
       - "*.md"
