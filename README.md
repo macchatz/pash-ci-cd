@@ -1,2 +1,2 @@
-# circle-ci-bot
-circle-ci-bot
+#pash ci / cd
+Ignores pushes on main
