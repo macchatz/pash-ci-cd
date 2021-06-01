@@ -6,7 +6,8 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for th
   push: 
-    branches: [ main ]
+    branches-ignore: #[ main ]
+      - 'main'
   pull_request:
     branches: [ main ]
 #    branches:    
