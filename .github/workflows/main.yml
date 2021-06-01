@@ -1,13 +1,24 @@
-name: CI
+name: Pash-Benchmark-Tests
 
 # execute the workflow only when we are pushing on a pull request 
 on: 
   pull_request:
-    types: [opened, synchronize]
+    #types: [assigned, opened, synchronize, reopened]
+    # we should add all the paths that we should ignore 
     paths-ignore:
       - "docs/**"
       - "**/.github/workflows/main.yml"
       - '**/README.md'
+  push:
+    branches:
+      - '*'
+      - '!master'
+    paths-ignore:
+      - "docs/**"
+      - "**/.github/workflows/main.yml"
+      - '**/README.md'
+
+    
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -24,9 +35,10 @@ jobs:
             run: |
               cd /pash/           
               git pull           
-              git checkout top-level-tests
+              git checkout top-level-tests # ${GITHUB_REF##*/} <- branch name
               cd scripts
               bash run_tests.sh  
+              cd actions
               bash parse.sh > results.log 2>&1  
               # get the timer in english
               date=$(LANG=en_us_88591; date)
@@ -49,5 +61,5 @@ jobs:
           # post the error
           - name: Exit-code
             run: |
-              cd /pash/scripts/
+              cd /pash/scripts/actions
               bash exit_code.sh
