@@ -28,7 +28,7 @@ on:
 # Jobs section
 jobs:
     Pash-Tests:
-        if: github.ref != 'refs/heads/main'
+        
         runs-on: ubuntu-18.04
         container:
             image: dkarnikis/test:latest
