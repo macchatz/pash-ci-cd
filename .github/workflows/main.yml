@@ -5,10 +5,13 @@ on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
     # we should add all the paths that we should ignore 
-    paths-ignore:
-      - "docs/**"
-      - "**/.github/workflows/main.yml"
-      - '**/README.md'
+    paths:
+      - "compiler/**"
+      - "runtime/**"
+#    paths-ignore:
+#      - "docs/**"
+#      - "**/.github/workflows/main.yml"
+#      - '**/README.md'
 #  push:
 #    branches:
 #      - '*'
