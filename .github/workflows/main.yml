@@ -33,9 +33,13 @@ jobs:
             # Fetches the latest changes and executes all the benchmarks
           - name: Running-Pash-Benchmarks
             run: |
-              cd /pash/           
-              git pull           
-              git checkout top-level-tests # ${GITHUB_REF##*/} <- branch name
+              git clone https://github.com/andromeda/pash -b ${GITHUB_REF##*/}
+              cd pash
+              bash scripts/distro-deps.sh
+              bash scripts/setup-pash
+              #cd /pash/           
+              #git pull           
+              git checkout ${GITHUB_REF##*/} ##top-level-tests # ${GITHUB_REF##*/} <- branch name
               cd scripts
               bash run_tests.sh  
               cd actions
