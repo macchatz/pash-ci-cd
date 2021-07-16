@@ -5,9 +5,6 @@ on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
     # we should add all the paths that we should ignore 
-    paths:
-      - "compiler/**"
-      - "runtime/**"
 #    paths-ignore:
 #      - "docs/**"
 #      - "**/.github/workflows/main.yml"
@@ -29,32 +26,12 @@ on:
 jobs:
     Pash-Tests:
         runs-on: ubuntu-18.04
-        container:
-            image: dkarnikis/test:latest
         steps:
           - uses: actions/checkout@v2 
             # Fetches the latest changes and executes all the benchmarks
           - name: Running-Pash-Benchmarks
             run: |
-              git clone https://github.com/andromeda/pash -b ${GITHUB_REF##*/}
-              cd pash
-              bash scripts/distro-deps.sh
-              bash scripts/setup-pash
-              #cd /pash/           
-              #git pull           
-              git checkout ${GITHUB_REF##*/} ##top-level-tests # ${GITHUB_REF##*/} <- branch name
-              cd scripts
-              bash run_tests.sh  
-              cd actions
-              bash parse.sh > results.log 2>&1  
-              # get the timer in english
-              date=$(LANG=en_us_88591; date)
-              echo "VERSION<<EOF" >> $GITHUB_ENV
-              echo "$date\n" >> $GITHUB_ENV
-              # Parses the results and construct a github message post
-              # we append the data to the global env
-              cat results.log >> $GITHUB_ENV
-              echo 'EOF' >> $GITHUB_ENV
+              echo 'hello world'
           # We post the results on the corresponding pull request thread
           - name: Posting Results
             uses: unsplash/comment-on-pr@master
@@ -64,9 +41,3 @@ jobs:
             with:
               msg: "${{ env.VERSION }}"
               check_for_duplicate_msg: false
-          # Check the return code of the scripts. If one of the tests failed
-          # post the error
-          - name: Exit-code
-            run: |
-              cd /pash/scripts/actions
-              bash exit_code.sh
