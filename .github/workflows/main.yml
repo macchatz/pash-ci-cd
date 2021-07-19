@@ -37,11 +37,9 @@ jobs:
           # We post the results on the corresponding pull request thread
         - name: Create comment
           uses: peter-evans/create-or-update-comment@v1
-            body: |
-              This is a multi-line test comment
-              - With GitHub **Markdown** :sparkles:
-              - Created by [create-or-update-comment][1]
-              - ${{ env.VERSION }}
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+        - name: Check outputs
+          run: |
+            echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+            echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
