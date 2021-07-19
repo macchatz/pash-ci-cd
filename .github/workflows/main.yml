@@ -5,13 +5,6 @@ on:
 
 
 
-    paths: 
-        - compiler/**
-        - runtime/**
-        - evaluation/**
-        - annotations/**
-
-
 # Jobs section
 jobs:
     Pash-Tests:
