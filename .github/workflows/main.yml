@@ -37,7 +37,7 @@ pull_request_target:
             # we append the data to the global env
             cat results.log >> $GITHUB_ENV
             echo 'EOF' >> $GITHUB_ENV
-            - name: Comment on PR
+          - name: Comment on PR
           uses: actions/github-script@v3
           with:
             script: |
@@ -45,7 +45,8 @@ pull_request_target:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: '${{ env.VERSION}}'})
+                body: '${{ env.VERSION}}',
+              })
         - name: Exit-code
           run: |
             cd scripts/workflow
