@@ -5,9 +5,6 @@ on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
 
-    paths: 
-        - compiler/**
-        - runtime/**
   workflow_dispatch:
 # Jobs section
 jobs:
@@ -24,10 +21,6 @@ jobs:
         - uses: actions/checkout@v2 
         - name: Running-Pash-Benchmarks
           run: |
-            bash scripts/distro-deps.sh
-            bash scripts/setup-pash.sh
-            export PASH_TOP=${GITHUB_WORKSPACE}
-            export PATH=$PATH:$PASH_TOP
             #cd scripts
             #bash run_tests.sh  
             #cd workflow
