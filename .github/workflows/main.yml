@@ -5,11 +5,11 @@ on:
 
 
 
-paths: 
-    - compiler/**
-    - runtime/**
-    - evaluation/**
-    - annotations/**
+    paths: 
+        - compiler/**
+        - runtime/**
+        - evaluation/**
+        - annotations/**
 
 
 # Jobs section
