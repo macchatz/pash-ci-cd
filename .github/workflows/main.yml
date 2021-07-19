@@ -26,7 +26,6 @@ pull_request_target:
           steps:
             - name: Checkout git repo
           uses: actions/checkout@v2
-            - name: Running-Pash-Benchmarks
           run: |
 
             # get the timer in english
