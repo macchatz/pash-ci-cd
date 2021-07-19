@@ -1,49 +1,21 @@
-name: Pash-Benchmark-Tests
-
-# execute the workflow only when we are pushing on a pull request 
-on: 
+name: Update AUTHORS
+on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
-
-  workflow_dispatch:
-# Jobs section
 jobs:
-    Pash-Tests:
-      strategy:
-        matrix:
-          os: 
-            - ubuntu-18.04
-            - ubuntu-20.04
-            #- debian #stable-20210408
-      runs-on: ${{ matrix.os }}
-            
-      steps:
-        - uses: actions/checkout@v2 
-        - name: Running-Pash-Benchmarks
-          run: |
-            #cd scripts
-            #bash run_tests.sh  
-            #cd workflow
-            #bash parse.sh > results.log 2>&1  
-            # get the timer in english
-            date=$(LANG=en_us_88591; date)
-            echo "VERSION<<EOF" >> $GITHUB_ENV
-            echo  "OS:${{matrix.os}}" >> $GITHUB_ENV
-            echo -e "$date\n" >> $GITHUB_ENV
-            # Parses the results and construct a github message post
-            # we append the data to the global env
-            echo 'xddd' >> $GITHUB_ENV
-            echo 'EOF' >> $GITHUB_ENV
-          # We post the results on the corresponding pull request thread
-        - name: Create comment
-          uses: peter-evans/create-or-update-comment@v1
-          with:
-            issue-number: 1
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-            - ${{ env.VERSION }}
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+  updateAuthors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Update AUTHORS
+        run: |
+          git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: update authors
+          title: Update AUTHORS
+          body: Credit new contributors by updating AUTHORS
+          branch: update-authors
