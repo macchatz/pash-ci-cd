@@ -1,29 +1,22 @@
-name: Pash-Benchmark-Tests
-
-# execute the workflow only when we are pushing on a pull request 
-on: 
-  pull_request:
-    types: [assigned, opened, synchronize, reopened]
-
-  workflow_dispatch:
-# Jobs section
+name: Update AUTHORS
+on:
+  push:
+    branches:
+      - main
 jobs:
-    Pash-Tests:
-      strategy:
-        matrix:
-          os: 
-            - ubuntu-18.04
-            - ubuntu-20.04
-            #- debian #stable-20210408
-      runs-on: ${{ matrix.os }}
-            
-      steps:
-        - uses: actions/checkout@v2 
-        - name: Create comment
-          uses: peter-evans/create-pull-request@v3
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-        - name: Check outputs
-          run: |
-            echo "Pull Request Number "
-            #echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+  updateAuthors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Update AUTHORS
+        run: |
+          git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: update authors
+          title: Update AUTHORS
+          body: Credit new contributors by updating AUTHORS
+          branch: update-authors
