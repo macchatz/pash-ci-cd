@@ -60,22 +60,10 @@ jobs:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: '1 2 3 4',
+                body: '${{ env.VERSION}}',
               })     
 
-       
-#        - uses: actions/github-script@v3
-#        - name: Comment on PR
-#          with:
-#            script: |
-#              github.issues.createComment({
-#                issue_number: context.issue.number,
-#                owner: context.repo.owner,
-#                repo: context.repo.repo,
-#                body: '${{ env.VERSION}}',
-#              })
-# 
-#        - name: Exit-code
-#        - run: |
-#            cd scripts/workflow
-#            bash exit_code.sh
+        - name: Exit-code
+        - run: |
+            cd scripts/workflow
+            bash exit_code.sh
