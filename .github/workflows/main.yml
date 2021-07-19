@@ -37,8 +37,6 @@ jobs:
           # We post the results on the corresponding pull request thread
         - name: Create comment
           uses: peter-evans/create-or-update-comment@v1
-          with:
-            issue-number: 1
           body: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
