@@ -45,8 +45,7 @@ pull_request_target:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: '${{ env.VERSION}}',
-              })
+                body: '${{ env.VERSION}}'})
         - name: Exit-code
           run: |
             cd scripts/workflow
