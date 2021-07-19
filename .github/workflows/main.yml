@@ -14,17 +14,14 @@ pull_request_target:
 workflow_dispatch:
   # Jobs section
 jobs:
-  Pash-Tests:
-    strategy:
-      matrix:
-        os: 
-        - ubuntu-18.04
-        - ubuntu-20.04
-          #- debian #stable-20210408
-      runs-on: ${{ matrix.os }}
+  build:
+      runs-on: ubuntu-20.04 #${{ matrix.os }}
       steps:
         - name: Checkout git repo
         uses: actions/checkout@v2
+        with:
+          repository: ${{ steps.head_repo_name.outputs.repo }}
+          fetch-depth: 0
         run: |
           # get the timer in english
           date=$(LANG=en_us_88591; date)
