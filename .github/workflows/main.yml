@@ -19,27 +19,11 @@ jobs:
             
       steps:
         - uses: actions/checkout@v2 
-        - name: Running-Pash-Benchmarks
-          run: |
-            #cd scripts
-            #bash run_tests.sh  
-            #cd workflow
-            #bash parse.sh > results.log 2>&1  
-            # get the timer in english
-            date=$(LANG=en_us_88591; date)
-            echo "VERSION<<EOF" >> $GITHUB_ENV
-            echo  "OS:${{matrix.os}}" >> $GITHUB_ENV
-            echo -e "$date\n" >> $GITHUB_ENV
-            # Parses the results and construct a github message post
-            # we append the data to the global env
-            echo 'xddd' >> $GITHUB_ENV
-            echo 'EOF' >> $GITHUB_ENV
-          # We post the results on the corresponding pull request thread
         - name: Create comment
-          uses: peter-evans/create-or-update-comment@v1
+          uses: peter-evans/create-pull-request@v3
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
         - name: Check outputs
           run: |
-            echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-            echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+            echo "Pull Request Number "
+            #echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
