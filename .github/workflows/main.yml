@@ -50,14 +50,14 @@ jobs:
             
         - uses: actions/github-script@v3
         - name: Comment on PR
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '${{ env.VERSION}}',
-            })
+          with:
+            script: |
+              github.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '${{ env.VERSION}}',
+              })
  
         - name: Exit-code
         - run: |
